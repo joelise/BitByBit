@@ -13,7 +13,9 @@ public class Unlock : MonoBehaviour
         if (playerInput == CorrectCode)
         {
             unlocked = true;
+           
             Debug.Log("Unlocked");
+            gameObject.SetActive(false);
         }
 
         else
