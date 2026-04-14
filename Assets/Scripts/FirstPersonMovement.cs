@@ -12,6 +12,8 @@ public class FirstPersonMovement : MonoBehaviour
     [SerializeField] private Transform cameraTransform;
     [SerializeField] private InputActionReference moveAction;
     [SerializeField] private InputActionReference jumpAction;
+    [SerializeField] private InputActionReference clickAction;
+    
 
     [Header("Gravity/Physics")]
     [SerializeField] private float jumpForce = 7f;
@@ -23,6 +25,10 @@ public class FirstPersonMovement : MonoBehaviour
     private bool _isGrounded;
     private float _verticalVelocity;
 
+    public Button button;
+    public bool CanMove;
+
+    public GameManager gameManager;
     private void Awake()
     {
         _characterController = GetComponent<CharacterController>();
@@ -30,9 +36,27 @@ public class FirstPersonMovement : MonoBehaviour
 
     private void Update()
     {
-        _isGrounded = _characterController.isGrounded;
-        HandleGravity();
-        HandleMovement();
+        if (gameManager.PlayerCanMove == true)
+        {
+            CanMove = true;
+        }
+        else
+        {
+            CanMove = false;
+        }
+            _isGrounded = _characterController.isGrounded;
+
+        if (CanMove == true)
+        {
+            _characterController.enabled = true;
+            HandleGravity();
+            HandleMovement();
+        }
+        if (CanMove == false)
+        {
+            moveAction.action.Disable();
+        }
+       
     }
 
     private void OnEnable()
@@ -40,6 +64,7 @@ public class FirstPersonMovement : MonoBehaviour
         moveAction.action.performed += StoreMovementInput;
         moveAction.action.canceled += StoreMovementInput;
         jumpAction.action.performed += Jump;
+        clickAction.action.Enable();
     }
 
     private void OnDisable()
@@ -51,6 +76,7 @@ public class FirstPersonMovement : MonoBehaviour
 
     private void StoreMovementInput(InputAction.CallbackContext context)
     {
+        
         _moveInput = context.ReadValue<Vector2>();
     }
 
@@ -74,6 +100,7 @@ public class FirstPersonMovement : MonoBehaviour
 
     private void HandleMovement()
     {
+        
         var move = cameraTransform.TransformDirection(new Vector3(_moveInput.x, 0, _moveInput.y)).normalized;
         var currentSpeed = walkSpeed;
         var finalMove = move * currentSpeed;
