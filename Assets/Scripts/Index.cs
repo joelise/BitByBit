@@ -53,7 +53,7 @@ public class Index : MonoBehaviour
     {
         foreach (var pair in BinaryIndex)
         {
-            Debug.Log($"Key: {pair.Key} Value: {pair.Value}");
+            //Debug.Log($"Key: {pair.Key} Value: {pair.Value}");
         }
     }
 
