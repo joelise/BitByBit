@@ -4,29 +4,17 @@ using System;
 
 public class Binary : MonoBehaviour
 {
+    [Header("Binary")]
     [SerializeField] private int binaryLength = 5;
     private string currentBinary;
     private int correctDecimal;
 
+    [Header("UI")]
     [SerializeField] private TMP_Text binaryText;
     public TMP_InputField InputText;
 
     public GameObject wall;
-    public GameManager gameManager;
-
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
-    {
-
-        GenerateBinary();
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
-
+    
     public void GenerateBinary()
     {
         currentBinary = "";
@@ -57,13 +45,14 @@ public class Binary : MonoBehaviour
         {
 
             Debug.Log("Correct");
-            gameManager.ToggleBinaryUI();
+            GameManager.instance.ToggleBinaryUI();
+           
             wall.GetComponent<Renderer>().material.color = new Color(59f / 255f, 255f / 255f, 0f / 255f, 72f/255f);
         }
         else
         {
             Debug.Log("Incorrect");
-            gameManager.ToggleBinaryUI();
+            GameManager.instance.ToggleBinaryUI();
             wall.GetComponent<Renderer>().material.color = new Color(255f / 255f, 26f / 255f, 0f / 255f, 72f / 255f);
         }
 

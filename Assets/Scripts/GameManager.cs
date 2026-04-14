@@ -2,43 +2,56 @@ using UnityEngine;
 
 public class GameManager : MonoBehaviour
 {
-    //public Canvas canvas;
-    public GameObject HelpUI;
-    public Button button;
-    private bool paused;
-    public GameObject BinaryUI;
-    public bool PlayerCanMove;
+    public static GameManager instance;
+
+    [Header("References")]
     public FirstPersonMovement playerMovement;
+    public GameObject Player;
+    public Button button;
+
+    [Header("UI")]
+    public GameObject HelpUI;
+    public GameObject BinaryUI;
     public bool CursorVisible;
-    public GameObject player;
+    public bool UiVisible;
 
+    private bool paused;
+    
 
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
+    public bool PlayerCanMove;
+    public float timer = 0f;
+   
+    private void Awake()
+    {
+        // Checks there is only one GameManager instance
+        if (instance == null)
+        {
+            instance = this;
+            DontDestroyOnLoad(gameObject);      // Doesn't destory gameManager between scenes
+        }
+        else
+        {
+            Destroy(gameObject);
+        }
+    }
+    
     void Start()
     {
-        HelpUI.SetActive(false);
-        PlayerCanMove = true;
-        Cursor.visible = false;
-        CursorVisible = false;
+        Setup();
     }
 
     // Update is called once per frame
     void Update()
     {
         if (Input.GetKeyDown(KeyCode.H))
-        {
             ToggleHelpUI();
-            
-        }
 
-        if (paused)
-        {
-            Time.timeScale = 0f;
-        }
-        else
-        {
-            Time.timeScale = 1f;
-        }
+
+        
+        timer += Time.deltaTime;
+
+
+        
 
         if (PlayerCanMove)
         {
@@ -51,9 +64,10 @@ public class GameManager : MonoBehaviour
             
         }
 
-        if (CursorVisible)
+        if (UiVisible)
         {
             Cursor.visible = true;
+            
             
         }
         else
@@ -62,18 +76,32 @@ public class GameManager : MonoBehaviour
         }
     }
 
+    public void Setup()
+    {
+        HelpUI.SetActive(false);
+        BinaryUI.SetActive(false);
+        PlayerCanMove = true;
+        Cursor.visible = false;
+        CursorVisible = false;
+    }
+
     public void ToggleHelpUI()
     {
-        paused = (!paused);
+        // Toggles the HelpUI on/off and stops player movement
+        //paused = (!paused);
+        UiVisible = (!UiVisible);
+        Player.SetActive(!Player.activeSelf);
         HelpUI.SetActive(!HelpUI.activeSelf);
+       
     }
 
     public void ToggleBinaryUI()
     {
-        PlayerCanMove = (!PlayerCanMove);
-        player.SetActive(!player.activeSelf);
+        // Toggles Binary Ui on/off and stops player movement
+        //PlayerCanMove = (!PlayerCanMove);
+        UiVisible = (!UiVisible);
+        Player.SetActive(!Player.activeSelf);
         BinaryUI.SetActive(!BinaryUI.activeSelf);
-        CursorVisible = !CursorVisible;
-
     }
+
 }

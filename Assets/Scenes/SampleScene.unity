@@ -1376,13 +1376,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e9b3a74f87b4ead4496ce778dabec8b0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::GameManager
-  HelpUI: {fileID: 333078147}
-  button: {fileID: 338782844}
-  BinaryUI: {fileID: 1567256286}
-  PlayerCanMove: 0
   playerMovement: {fileID: 859812484}
+  Player: {fileID: 859812482}
+  button: {fileID: 338782844}
+  HelpUI: {fileID: 333078147}
+  BinaryUI: {fileID: 1567256286}
   CursorVisible: 0
-  player: {fileID: 859812482}
+  PlayerCanMove: 0
 --- !u!4 &650744008
 Transform:
   m_ObjectHideFlags: 0

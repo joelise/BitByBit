@@ -26,6 +26,7 @@ public class Player : MonoBehaviour
 
          }*/
 
+        
         CheckForInteraction();
         if (Input.GetMouseButtonDown(0) && currentInteractable != null)
         {
