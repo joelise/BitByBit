@@ -11,7 +11,7 @@ public class Binary : MonoBehaviour
 
     [Header("UI")]
     [SerializeField] private TMP_Text binaryText;
-    public TMP_InputField InputText;
+    //public TMP_InputField InputText;
 
     public GameObject wall;
 
@@ -40,7 +40,7 @@ public class Binary : MonoBehaviour
         return System.Convert.ToInt32(binary, 2);
     }
 
-    public void SubmitAnswer()
+  /*  public void SubmitAnswer()
     {
         string correctAnswer = correctDecimal.ToString();
         string playerAnswer = InputText.text;
@@ -62,7 +62,7 @@ public class Binary : MonoBehaviour
         }
 
         InputText.text = "";
-    }
+    }*/
 
     
 }
