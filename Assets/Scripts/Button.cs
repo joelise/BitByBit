@@ -15,7 +15,7 @@ public class Button : MonoBehaviour, IInteractable
 
     void Interacted()
     {
-        binary.GenerateBinary();
+       // binary.GenerateBinary();
         //Cursor.visible = true;
         Cursor.lockState = CursorLockMode.None;
         GameManager.instance.ToggleBinaryUI();

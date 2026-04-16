@@ -14,7 +14,11 @@ public class Binary : MonoBehaviour
     public TMP_InputField InputText;
 
     public GameObject wall;
-    
+
+    private void Start()
+    {
+        GenerateBinary();
+    }
     public void GenerateBinary()
     {
         currentBinary = "";
@@ -48,6 +52,7 @@ public class Binary : MonoBehaviour
             GameManager.instance.ToggleBinaryUI();
            
             wall.GetComponent<Renderer>().material.color = new Color(59f / 255f, 255f / 255f, 0f / 255f, 72f/255f);
+            wall.GetComponent<BoxCollider>().enabled = false;
         }
         else
         {

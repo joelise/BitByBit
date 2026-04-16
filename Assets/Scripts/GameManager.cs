@@ -1,4 +1,6 @@
+using Unity.VectorGraphics;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
@@ -102,6 +104,11 @@ public class GameManager : MonoBehaviour
         UiVisible = (!UiVisible);
         Player.SetActive(!Player.activeSelf);
         BinaryUI.SetActive(!BinaryUI.activeSelf);
+    }
+
+    public void OpenScene(string SceneName)
+    {
+        SceneManager.LoadScene(SceneName);
     }
 
 }
