@@ -25,7 +25,7 @@ public class FirstPersonMovement : MonoBehaviour
     private bool _isGrounded;
     private float _verticalVelocity;
 
-    public Button button;
+    //public Button button;
     public bool CanMove;
 
     public GameManager gameManager;

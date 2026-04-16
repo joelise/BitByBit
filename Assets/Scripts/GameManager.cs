@@ -9,11 +9,11 @@ public class GameManager : MonoBehaviour
     [Header("References")]
     public FirstPersonMovement playerMovement;
     public GameObject Player;
-    public Button button;
+   // public Button button;
 
     [Header("UI")]
-    public GameObject HelpUI;
-    public GameObject BinaryUI;
+   // public GameObject HelpUI;
+   // public GameObject BinaryUI;
     public bool CursorVisible;
     public bool UiVisible;
 
@@ -80,8 +80,8 @@ public class GameManager : MonoBehaviour
 
     public void Setup()
     {
-        HelpUI.SetActive(false);
-        BinaryUI.SetActive(false);
+        //HelpUI.SetActive(false);
+        //BinaryUI.SetActive(false);
         PlayerCanMove = true;
         Cursor.visible = false;
         CursorVisible = false;
@@ -93,7 +93,7 @@ public class GameManager : MonoBehaviour
         //paused = (!paused);
         UiVisible = (!UiVisible);
         Player.SetActive(!Player.activeSelf);
-        HelpUI.SetActive(!HelpUI.activeSelf);
+       // HelpUI.SetActive(!HelpUI.activeSelf);
        
     }
 
@@ -103,7 +103,7 @@ public class GameManager : MonoBehaviour
         //PlayerCanMove = (!PlayerCanMove);
         UiVisible = (!UiVisible);
         Player.SetActive(!Player.activeSelf);
-        BinaryUI.SetActive(!BinaryUI.activeSelf);
+        //BinaryUI.SetActive(!BinaryUI.activeSelf);
     }
 
     public void OpenScene(string SceneName)

@@ -8,7 +8,7 @@ public class Player : MonoBehaviour
     private IInteractable currentInteractable;
     private Outline currentOutline;
     //public float interactDistance = 3f;
-    public Button buttonScript;
+    //public Button buttonScript;
 
     void Start()
     {
@@ -33,12 +33,12 @@ public class Player : MonoBehaviour
             currentInteractable.Interact();
         }
 
-        if (buttonScript.show == true)
-        {
-            Cursor.visible = true;
-            Cursor.lockState = CursorLockMode.None;
+       // if (buttonScript.show == true)
+     //   {
+      //      Cursor.visible = true;
+       //     Cursor.lockState = CursorLockMode.None;
             
-        }
+       // }
     }
 
     void CheckForInteraction()
