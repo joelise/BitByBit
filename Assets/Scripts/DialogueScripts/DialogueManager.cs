@@ -29,29 +29,38 @@ public class DialogueManager : MonoBehaviour
 
     void Update()
     {
-        while (!IsTyping)
+        if (Input.GetKeyDown(KeyCode.Return) || Input.GetKeyDown(KeyCode.Space))
         {
-            if (Input.GetKeyDown(KeyCode.Return) || Input.GetKeyDown(KeyCode.Space))
+            if (IsTyping)
+                return;
+            else
             {
+                enterText.DOFade(0, 2f);
                 EnterText.SetActive(false);
                 NextLine();
-
-
-                /*if (DialogueText.text == CurrentLines[index])
-                {
-                    NextLine();
-                }
-                else
-                {
-                    StopAllCoroutines();
-                    DialogueText.text = string.Empty;
-                    DialogueText.text = "";
-                    //TextPanel.SetActive(false);
-                }*/
             }
+                
+            
 
+
+            /*if (DialogueText.text == CurrentLines[index])
+            {
+                NextLine();
+            }
+            else
+            {
+                StopAllCoroutines();
+                DialogueText.text = string.Empty;
+                DialogueText.text = "";
+                //TextPanel.SetActive(false);
+            }*/
         }
-        
+
+
+
+
+
+
     }
 
     public void StartDialogue(Dialogue dialogue)
@@ -66,9 +75,10 @@ public class DialogueManager : MonoBehaviour
 
     public IEnumerator TypeLine()
     {
-        IsTyping = true;
+        
         foreach (char c in CurrentLines[index].ToCharArray())
         {
+            IsTyping = true;
             DialogueText.text += c;
 
             if (c == '.' || c == '!' || c == '?' || c == ',')
@@ -80,8 +90,9 @@ public class DialogueManager : MonoBehaviour
         }
         
         EnterText.SetActive(true);
-        enterText.DOFade(0, 0.3f);
-        //IsTyping = false;
+        enterText.DOFade(160f, 2f);
+        
+        IsTyping = false;
     }
 
     public void NextLine()
