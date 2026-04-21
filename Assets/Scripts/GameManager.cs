@@ -12,7 +12,8 @@ public class GameManager : MonoBehaviour
    // public Button button;
 
     [Header("UI")]
-   // public GameObject HelpUI;
+    public GameObject HelpUI;
+  
     public GameObject BinaryUI;
     public bool CursorVisible;
     public bool UiVisible;
@@ -39,6 +40,7 @@ public class GameManager : MonoBehaviour
     
     void Start()
     {
+       
         Setup();
     }
 
@@ -80,7 +82,7 @@ public class GameManager : MonoBehaviour
 
     public void Setup()
     {
-        //HelpUI.SetActive(false);
+        HelpUI.SetActive(false);
         BinaryUI.SetActive(false);
         PlayerCanMove = true;
         Cursor.visible = false;
@@ -93,7 +95,7 @@ public class GameManager : MonoBehaviour
         paused = (!paused);
         UiVisible = (!UiVisible);
         Player.SetActive(!Player.activeSelf);
-        //HelpUI.SetActive(!HelpUI.activeSelf);
+        HelpUI.SetActive(!HelpUI.activeSelf);
        
     }
 
