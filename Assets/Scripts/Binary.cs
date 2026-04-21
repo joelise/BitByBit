@@ -9,18 +9,81 @@ public class Binary : MonoBehaviour
     private int correctDecimal;
     private string currentBinary;
 
-    [Header("UI")]
-    [SerializeField] private TMP_Text gateBinaryText;
-    [SerializeField] private TMP_Text uiBinaryText;
-    [SerializeField] private TMP_InputField playerInput;
-
     [Header("Gate")]
     [SerializeField] private Gate binaryGate;
+    [SerializeField] private TMP_Text gateBinaryText;
 
     private void Start()
     {
         GenerateBinary();
-        playerInput.onSubmit.AddListener(CheckAnswer);
+        
+    }
+    public void GenerateBinary()
+    {
+        currentBinary = "";
+        for (int i = 0; i < binaryLength; i++)
+        {
+            currentBinary += UnityEngine.Random.Range(0, 2).ToString();
+        }
+
+        correctDecimal = BinaryToDecimal(currentBinary);
+        gateBinaryText.text = currentBinary;
+        Debug.Log(currentBinary);
+    }
+
+    public int BinaryToDecimal(string binary)
+    {
+        return System.Convert.ToInt32(binary, 2);
+    }
+
+    public void CheckAnswer(string playerAnswer)
+    {
+        string correctAnswer = correctDecimal.ToString();
+
+        if (playerAnswer == correctAnswer)
+        {
+            binaryGate.OpenGate();
+        }
+        else
+        {
+            binaryGate.CloseGate();
+        }
+    }
+
+    public void SetBinary(TMP_Text overlayText)
+    {
+         
+        //gateBinaryText.text = currentBinary;
+        overlayText.text = currentBinary;
+    }
+
+    /*[Header("Binary")]
+    [SerializeField] private int binaryLength = 4;
+    private int correctDecimal;
+    private string currentBinary;
+
+    [Header("UI")]
+    [SerializeField] private TMP_Text gateBinaryText;
+    [SerializeField] private TMP_Text uiBinaryText;
+    [SerializeField] private TMP_InputField playerInput;
+    public BinaryUI binaryUI;
+
+    [Header("Gate")]
+    [SerializeField] private Gate binaryGate;
+    public bool CurrentGate;
+    [SerializeField] private GameObject button;
+    [SerializeField] Binary binaryScript;
+
+    private void Awake()
+    {
+        //OnDisable();
+    }
+
+    private void Start()
+    {
+        GenerateBinary();
+        CurrentGate = false;
+        //playerInput.onSubmit.AddListener(CheckAnswer);
     }
 
     private void GenerateBinary()
@@ -33,7 +96,7 @@ public class Binary : MonoBehaviour
         }
 
         gateBinaryText.text = currentBinary;
-        uiBinaryText.text = currentBinary;
+        UpdateUI();
         correctDecimal = BinaryToDecimal(currentBinary);
         Debug.Log(correctDecimal);
     }
@@ -43,23 +106,68 @@ public class Binary : MonoBehaviour
         return System.Convert.ToInt32(binary, 2);
     }
 
+    public void CheckAnswer()
+    {
+        string correctAnswer = correctDecimal.ToString();
+        string playerAnswer = binaryUI.PlayerAnswer();
+
+        if (playerAnswer == correctAnswer)
+        {
+
+            binaryGate.OpenGate();
+            button.layer = 0;
+            binaryScript.enabled = false;
+        }
+        else
+        {
+
+            binaryGate.CloseGate();
+
+        }
+
+        playerInput.text = "";
+    }
     public void CheckAnswer(string playerAnswer)
     {
         string correctAnswer = correctDecimal.ToString();
 
         if (playerAnswer == correctAnswer)
         {
-           
+
             binaryGate.OpenGate();
+            button.layer = 0;
+            binaryScript.enabled = false;
         }
         else
         {
-            
+
             binaryGate.CloseGate();
+            
         }
 
         playerInput.text = "";
+
+
+
+
+
     }
+
+    public void OnEnable()
+    {
+        playerInput.onSubmit.RemoveAllListeners();
+        playerInput.onSubmit.AddListener(CheckAnswer);
+    }
+
+    public void OnDisable()
+    {
+        playerInput.onSubmit.RemoveListener(CheckAnswer);
+    }
+
+    public void UpdateUI()
+    {
+        uiBinaryText.text = currentBinary;
+    }*/
 
     /*[Header("Binary")]
     [SerializeField] private int binaryLength = 5;
