@@ -1,6 +1,7 @@
 using Unity.VectorGraphics;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using System;
 
 public class GameManager : MonoBehaviour
 {
@@ -9,6 +10,7 @@ public class GameManager : MonoBehaviour
     [Header("References")]
     public FirstPersonMovement playerMovement;
     public GameObject Player;
+    public GameObject HelpText;
    // public Button button;
 
     [Header("UI")]
@@ -23,6 +25,8 @@ public class GameManager : MonoBehaviour
 
     public bool PlayerCanMove;
     public float timer = 0f;
+
+    public int AttemptCount = 0;
    
     private void Awake()
     {
@@ -40,7 +44,7 @@ public class GameManager : MonoBehaviour
     
     void Start()
     {
-       
+        AttemptCount = 0;
         Setup();
     }
 
@@ -48,7 +52,12 @@ public class GameManager : MonoBehaviour
     void Update()
     {
         if (Input.GetKeyDown(KeyCode.H))
+        {
             ToggleHelpUI();
+            HelpText.SetActive(false);
+            AttemptCount = 0;
+        }
+           
 
 
         
@@ -68,6 +77,7 @@ public class GameManager : MonoBehaviour
             
         }
 
+        //Cursor.visible = UiVisible;
         if (UiVisible)
         {
             Cursor.visible = true;
@@ -78,10 +88,18 @@ public class GameManager : MonoBehaviour
         {
             Cursor.visible = false;
         }
+
+        if (AttemptCount >= 3)
+        {
+            //ToggleHelpText();
+           // Debug.Log("HelpText");
+        }
+            //ToggleHelpText();
     }
 
     public void Setup()
     {
+        HelpText.SetActive(false);
         HelpUI.SetActive(false);
         BinaryUI.SetActive(false);
         PlayerCanMove = true;
@@ -108,9 +126,16 @@ public class GameManager : MonoBehaviour
         BinaryUI.SetActive(!BinaryUI.activeSelf);
     }
 
+    public void ToggleHelpText()
+    {
+        HelpText.SetActive(!HelpText.activeSelf);
+
+    }
+
     public void OpenScene(string SceneName)
     {
         SceneManager.LoadScene(SceneName);
     }
+
 
 }

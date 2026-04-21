@@ -31,7 +31,11 @@ public class Gate : MonoBehaviour
         GameManager.instance.ToggleBinaryUI();
         gateRenderer.material = incorrectMat;
         gateCollider.enabled = true;
-       
+
+       if (GameManager.instance.AttemptCount >= 3)
+        {
+            GameManager.instance.ToggleHelpText();
+        }
     }
 
     /*[SerializeField] private Renderer gateRenderer;

@@ -3,6 +3,7 @@ using UnityEngine;
 
 public class BinaryUI : MonoBehaviour
 {
+    //public int AttemptAmount = 0;
     [SerializeField] private TMP_InputField playerInput;
     [SerializeField] private TMP_Text overlayText;
 
@@ -21,6 +22,7 @@ public class BinaryUI : MonoBehaviour
 
     void SubmitAnswer(string input)
     {
+       
         currentGateBinary.CheckAnswer(input);
         playerInput.text = "";
     }

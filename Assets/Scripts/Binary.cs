@@ -46,7 +46,9 @@ public class Binary : MonoBehaviour
         }
         else
         {
+            GameManager.instance.AttemptCount++;
             binaryGate.CloseGate();
+            
         }
     }
 

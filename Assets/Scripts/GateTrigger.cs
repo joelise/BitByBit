@@ -9,7 +9,11 @@ public class GateTrigger : MonoBehaviour
     private void OnTriggerEnter(Collider other)
     {
         if (FirstTrigger)
-            GameManager.instance.ToggleHelpUI();
+        {
+            //GameManager.instance.ToggleHelpUI();
+            //FirstTrigger = false;
+        }
+            
         if (other.CompareTag("Player"))
             ui.SetGate(binary);
         
