@@ -15,11 +15,12 @@ public class GameManager : MonoBehaviour
 
     [Header("UI")]
     public GameObject HelpUI;
+    public GameObject NoteUI;
   
     public GameObject BinaryUI;
     public bool CursorVisible;
     public bool UiVisible;
-
+    public bool CursorLocked;
     private bool paused;
     
 
@@ -58,7 +59,7 @@ public class GameManager : MonoBehaviour
             AttemptCount = 0;
         }
            
-
+       
 
         
         timer += Time.deltaTime;
@@ -81,12 +82,13 @@ public class GameManager : MonoBehaviour
         if (UiVisible)
         {
             Cursor.visible = true;
-            
+            Cursor.lockState = CursorLockMode.None;
             
         }
         else
         {
             Cursor.visible = false;
+            Cursor.lockState = CursorLockMode.Locked;
         }
 
         if (AttemptCount >= 3)
@@ -95,8 +97,20 @@ public class GameManager : MonoBehaviour
            // Debug.Log("HelpText");
         }
 
+       // if (CursorLocked)
+       // {
+            
+       // }
+
+        if (Input.GetKeyDown(KeyCode.Tab))
+        {
+            ToggleNoteUI();
+        }
+
        
-            //ToggleHelpText();
+
+
+        //ToggleHelpText();
     }
 
     public void Setup()
@@ -107,6 +121,7 @@ public class GameManager : MonoBehaviour
         PlayerCanMove = true;
         Cursor.visible = false;
         CursorVisible = false;
+        CursorLocked = true;
     }
 
     public void ToggleHelpUI()
@@ -132,6 +147,15 @@ public class GameManager : MonoBehaviour
     {
         HelpText.SetActive(!HelpText.activeSelf);
 
+    }
+
+    public void ToggleNoteUI()
+    {
+        CursorLocked = (!CursorLocked);
+        PlayerCanMove = (!PlayerCanMove);
+        UiVisible = (!UiVisible);
+        Player.SetActive(!Player.activeSelf);
+        NoteUI.SetActive(!NoteUI.activeSelf);
     }
 
     public void OpenScene(string SceneName)
