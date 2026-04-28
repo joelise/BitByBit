@@ -106,10 +106,12 @@ Material:
     - _Clip: 0
     - _Cull: 2
     - _DstBlend: 1
+    - _DstBlendAlpha: 1
     - _MasterIntensity: 4
     - _QueueControl: 0
     - _QueueOffset: 0
     - _SrcBlend: 5
+    - _SrcBlendAlpha: 1
     - _Surface: 1
     - _Tex01Intensity: 15
     - _Tex02Intensity: 15
@@ -127,6 +129,7 @@ Material:
     - Vector2_C3A961A0: {r: 0, g: 1, b: 0, a: 0}
     - Vector2_D6AA7B7D: {r: 1, g: 1, b: 0, a: 0}
     - Vector2_E10066FE: {r: 0, g: 1, b: 0, a: 0}
+    - _Color: {r: 0.05022621, g: 0.95283014, b: 0, a: 1}
     - _Tex01Speed: {r: 0.2, g: 0.2, b: 0, a: 0}
     - _Tex01Tiling: {r: 0.2, g: -1, b: 0, a: 0}
     - _Tex02Speed: {r: 0.2, g: -0.2, b: 0, a: 0}

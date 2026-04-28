@@ -56,6 +56,15 @@ public class FirstPersonMovement : MonoBehaviour
         {
             moveAction.action.Disable();
         }
+
+        if (DialogueManager.Instance.Active == true)
+        {
+            jumpAction.action.Disable();
+        }
+        else
+        {
+            jumpAction.action.Enable();
+        }
        
     }
 

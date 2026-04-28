@@ -14,6 +14,7 @@ public class DialogueManager : MonoBehaviour
     public GameObject EnterText;
     public TMP_Text enterText;
     public bool IsTyping = false;
+    public bool Active = false;
     
 
     public int index;
@@ -31,8 +32,18 @@ public class DialogueManager : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.Return) || Input.GetKeyDown(KeyCode.Space))
         {
+            //if (IsTyping)
+                //return;
+
             if (IsTyping)
-                return;
+            {
+                StopAllCoroutines();
+                DialogueText.text = CurrentLines[index];
+                EnterText.SetActive(true);
+                enterText.DOFade(160f, 2f);
+                IsTyping = false;
+                
+            }
             else
             {
                 enterText.DOFade(0, 2f);
@@ -65,6 +76,7 @@ public class DialogueManager : MonoBehaviour
 
     public void StartDialogue(Dialogue dialogue)
     {
+        Active = true;
         //TextPanel.SetActive(true);
         index = 0;
         CurrentLines = dialogue.Lines;
@@ -107,6 +119,7 @@ public class DialogueManager : MonoBehaviour
         {
             StopAllCoroutines();
             IsTyping = false;
+            Active = false;
             DialogueText.text = string.Empty;
             DialogueText.text = "";
             TextPanel.SetActive(false);

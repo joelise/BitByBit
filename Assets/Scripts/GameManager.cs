@@ -94,6 +94,8 @@ public class GameManager : MonoBehaviour
             //ToggleHelpText();
            // Debug.Log("HelpText");
         }
+
+       
             //ToggleHelpText();
     }
 
