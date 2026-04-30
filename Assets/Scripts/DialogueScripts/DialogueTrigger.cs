@@ -5,10 +5,27 @@ public class DialogueTrigger : MonoBehaviour
     public Dialogue dialogue;
     private bool hasTriggered = false;
 
+    public bool isPath = false;
+    
+    public GameObject[] otherTriggers;
+
     private void OnTriggerEnter(Collider other)
     {
+        if (isPath && hasTriggered)
+        {
+            foreach (GameObject t in otherTriggers)
+            {
+                t.SetActive(false);
+            }
+        }
+
         if (hasTriggered)
             return;
+
+
+
+
+
 
         if (other.CompareTag("Player"))
         {

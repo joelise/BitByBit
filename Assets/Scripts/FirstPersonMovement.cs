@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.EventSystems;
 using UnityEngine.InputSystem;
 
 public class FirstPersonMovement : MonoBehaviour
@@ -27,7 +28,7 @@ public class FirstPersonMovement : MonoBehaviour
 
     //public Button button;
     public bool CanMove;
-
+    
     public GameManager gameManager;
     private void Awake()
     {
@@ -54,7 +55,11 @@ public class FirstPersonMovement : MonoBehaviour
         }
         if (CanMove == false)
         {
+            _moveInput = Vector2.zero;
+            _characterController.enabled = false;
+           
             moveAction.action.Disable();
+           
         }
 
         if (DialogueManager.Instance.Active == true)

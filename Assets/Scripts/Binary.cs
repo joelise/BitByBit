@@ -1,6 +1,7 @@
 using UnityEngine;
 using TMPro;
 using System;
+using System.Text;
 
 public class Binary : MonoBehaviour
 {
@@ -27,6 +28,7 @@ public class Binary : MonoBehaviour
         }
 
         correctDecimal = BinaryToDecimal(currentBinary);
+        currentBinary = FormatBinary(currentBinary);
         gateBinaryText.text = currentBinary;
         Debug.Log(currentBinary);
     }
@@ -34,6 +36,30 @@ public class Binary : MonoBehaviour
     public int BinaryToDecimal(string binary)
     {
         return System.Convert.ToInt32(binary, 2);
+    }
+
+    string FormatBinary(string binary)
+    {
+        if (binaryLength <= 4)
+            return binary;
+
+        StringBuilder sb = new StringBuilder();
+
+        int count = 0;
+
+        for (int i = binary.Length - 1; i >= 0; i--)
+        {
+            sb.Insert(0, binary[i]);
+            count++;
+
+            if (count == 4 && i != 0)
+            {
+                sb.Insert(0, ' ');
+                count = 0;
+            }
+        }
+
+        return sb.ToString();
     }
 
     public void CheckAnswer(string playerAnswer)

@@ -2,6 +2,7 @@ using Unity.VectorGraphics;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using System;
+using TMPro;
 
 public class GameManager : MonoBehaviour
 {
@@ -18,11 +19,17 @@ public class GameManager : MonoBehaviour
     public GameObject NoteUI;
   
     public GameObject BinaryUI;
+    public GameObject EndUI;
     public bool CursorVisible;
     public bool UiVisible;
     public bool CursorLocked;
     private bool paused;
-    
+
+
+    [Header("Timer")]
+    private float startTime;
+    private bool isTiming;
+    public TMP_Text timeText;
 
     public bool PlayerCanMove;
     public float timer = 0f;
@@ -62,7 +69,7 @@ public class GameManager : MonoBehaviour
        
 
         
-        timer += Time.deltaTime;
+        //timer += Time.deltaTime;
 
 
         
@@ -70,6 +77,7 @@ public class GameManager : MonoBehaviour
         if (PlayerCanMove)
         {
             playerMovement.enabled = true;
+            
            
         }
         else
@@ -152,10 +160,49 @@ public class GameManager : MonoBehaviour
     public void ToggleNoteUI()
     {
         CursorLocked = (!CursorLocked);
+        //PlayerCanMove = (!PlayerCanMove);
+        UiVisible = (!UiVisible);
+        //Player.SetActive(!Player.activeSelf);
+        NoteUI.SetActive(!NoteUI.activeSelf);
+    }
+
+    public void GameEnd()
+    {
+        CursorLocked = (!CursorLocked);
         PlayerCanMove = (!PlayerCanMove);
         UiVisible = (!UiVisible);
         Player.SetActive(!Player.activeSelf);
-        NoteUI.SetActive(!NoteUI.activeSelf);
+        Time.timeScale = 0;
+        timeText.text = TimeTaken();
+        EndUI.SetActive(true);
+    }
+
+    public void StartTimer()
+    {
+        startTime = Time.time;
+        isTiming = true;
+    }
+
+    public float GetElapsedTime()
+    {
+        if (!isTiming) return 0f;
+        return Time.time - startTime;
+    }
+
+    public void StopTimer()
+    {
+        isTiming = false;
+    }
+
+    public string TimeTaken()
+    {
+        float elapsedTime = GetElapsedTime();
+        int minutes = Mathf.FloorToInt(elapsedTime / 60f);
+        int seconds = Mathf.FloorToInt(elapsedTime % 60f);
+
+        string timeformatted = string.Format("{0:00}:{1:00}", minutes, seconds);
+
+        return timeformatted;
     }
 
     public void OpenScene(string SceneName)
