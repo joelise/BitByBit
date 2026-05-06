@@ -24,6 +24,7 @@ public class GameManager : MonoBehaviour
     public bool UiVisible;
     public bool CursorLocked;
     private bool paused;
+    public GameObject PauseMenu;
 
 
     [Header("Timer")]
@@ -42,7 +43,7 @@ public class GameManager : MonoBehaviour
         if (instance == null)
         {
             instance = this;
-            DontDestroyOnLoad(gameObject);      // Doesn't destory gameManager between scenes
+            //DontDestroyOnLoad(gameObject);      // Doesn't destory gameManager between scenes
         }
         else
         {
@@ -117,7 +118,19 @@ public class GameManager : MonoBehaviour
 
        
 
+        if (Input.GetKeyDown(KeyCode.Escape))
+        {
+            TogglePause();
+        }
 
+        if (paused)
+        {
+            Time.timeScale = 0f;
+        }
+        else
+        {
+            Time.timeScale = 1f;
+        }
         //ToggleHelpText();
     }
 
@@ -130,12 +143,13 @@ public class GameManager : MonoBehaviour
         Cursor.visible = false;
         CursorVisible = false;
         CursorLocked = true;
+        PauseMenu.SetActive(false);
     }
 
     public void ToggleHelpUI()
     {
         // Toggles the HelpUI on/off and stops player movement
-        paused = (!paused);
+        //paused = (!paused);
         UiVisible = (!UiVisible);
         Player.SetActive(!Player.activeSelf);
         HelpUI.SetActive(!HelpUI.activeSelf);
@@ -208,6 +222,16 @@ public class GameManager : MonoBehaviour
     public void OpenScene(string SceneName)
     {
         SceneManager.LoadScene(SceneName);
+    }
+
+
+    public void TogglePause()
+    {
+        paused = !paused;
+        CursorLocked = (!CursorLocked);
+        PlayerCanMove = (!PlayerCanMove);
+        UiVisible = (!UiVisible);
+        PauseMenu.SetActive(!PauseMenu.activeSelf);
     }
 
 
